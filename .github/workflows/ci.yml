@@ -1,10 +1,20 @@
-name: Build
+name: CI
 
 on: [push]
 
 jobs:
-  tests:
-    runs-on: ubuntu-latest
+  build:
+    name: Build
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ linux/amd64, linux/arm64 ]
+
+    runs-on: ${{ matrix.platform == 'linux/arm64' && 'ubuntu-22.04-arm' || 'ubuntu-latest' }}
+
+    container:
+      image: ghcr.io/zen0x7f/container:debug
 
     services:
       mysql:
@@ -30,22 +40,6 @@ jobs:
           restore-keys: |
             yarn-
 
-      - name: Set node.js 22.x
-        uses: actions/setup-node@v6
-        with:
-          node-version: 22.x
-
-      - name: Run yarn install
-        uses: borales/actions-yarn@v5
-        with:
-          cmd: install
-
-      - name: Run yarn build
-        uses: borales/actions-yarn@v5
-        with:
-          dir: backend
-          cmd: build
-
       - name: Cache composer dependencies
         uses: actions/cache@v4
         with:
@@ -54,29 +48,24 @@ jobs:
           restore-keys: |
             composer-
 
-      - name: Copy .env
+      - name: Prepare project
         run: |
-          php -r "file_exists('.env') || copy('.env.ci', '.env');"
+          composer install
+          yarn
+          cp .env.ci .env
+          php artisan key:generate
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, mysql
-          coverage: pcov
-
-      - name: Run composer install
-        run: |
-          composer install -n --prefer-dist
-
-      - name: Prepare Laravel Application
+      - name: Prepare database
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
         run: |
-          cp .env.ci .env
-          php artisan key:generate
           php artisan migrate
+          php artisan db:seed
+
+      - name: Prepare assets
+        run: |
+          yarn build
 
       - name: Run tests
         env:
