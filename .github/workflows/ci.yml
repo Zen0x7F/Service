@@ -34,7 +34,7 @@ jobs:
         run: |
           git config --global --add safe.directory /__w/Service/Service
           git clone https://github.com/zen0x7f/service.git .
-          git checkout ${{ github.ref }}
+          git checkout ${{ github.sha }}
 
       - name: Prepare project
         run: |
@@ -60,7 +60,10 @@ jobs:
           DB_HOST: mysql
           DB_PORT: 3306
         run: |
+          # Running default tests
           php artisan test --coverage --coverage-clover storage/coverage/coverage.xml
+          # Running PHP style test
+          ./vendor/bin/pint --test
 
       - uses: codecov/codecov-action@v3
         if: ${{ matrix.platform == 'linux/amd64' }}
