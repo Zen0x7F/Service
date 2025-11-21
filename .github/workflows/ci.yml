@@ -32,6 +32,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
+          git config --global --add safe.directory /__w/Service/Service
           git clone https://github.com/zen0x7f/service.git .
           git checkout ${{ github.ref }}
 
