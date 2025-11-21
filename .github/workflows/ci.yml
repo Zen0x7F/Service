@@ -30,6 +30,11 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
+      - name: Checkout
+        run: |
+          git clone https://github.com/zen0x7f/service.git .
+          git checkout ${{ github.ref }}
+
       - name: Cache node dependencies
         uses: actions/cache@v4
         with:
