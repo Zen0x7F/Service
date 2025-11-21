@@ -56,7 +56,6 @@ jobs:
           yarn build
 
       - name: Run tests
-        if: ${{ matrix.platform == 'linux/amd64' }}
         env:
           DB_HOST: mysql
           DB_PORT: 3306
@@ -64,6 +63,7 @@ jobs:
           php artisan test --coverage --coverage-clover storage/coverage/coverage.xml
 
       - uses: codecov/codecov-action@v3
+        if: ${{ matrix.platform == 'linux/amd64' }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./storage/coverage/coverage.xml
