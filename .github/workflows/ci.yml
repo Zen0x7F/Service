@@ -26,7 +26,7 @@ jobs:
           MYSQL_PASSWORD: service_password
           MYSQL_DATABASE: service
         ports:
-          - 3306
+          - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
@@ -57,8 +57,8 @@ jobs:
 
       - name: Prepare database
         env:
-          DB_HOST: 127.0.0.1
-          DB_PORT: ${{ job.services.mysql.ports[3306] }}
+          DB_HOST: mysql
+          DB_PORT: 3306
         run: |
           php artisan migrate
           php artisan db:seed
@@ -69,8 +69,8 @@ jobs:
 
       - name: Run tests
         env:
-          DB_HOST: 127.0.0.1
-          DB_PORT: ${{ job.services.mysql.ports[3306] }}
+          DB_HOST: mysql
+          DB_PORT: 3306
         run: |
           php artisan test --coverage --coverage-clover storage/coverage/coverage.xml
 
