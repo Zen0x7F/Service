@@ -36,22 +36,6 @@ jobs:
           git clone https://github.com/zen0x7f/service.git .
           git checkout ${{ github.ref }}
 
-      - name: Cache node dependencies
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            yarn-
-
-      - name: Cache composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            composer-
-
       - name: Prepare project
         run: |
           composer install
