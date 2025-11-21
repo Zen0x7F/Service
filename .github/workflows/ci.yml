@@ -6,12 +6,7 @@ jobs:
   build:
     name: Build
 
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [ linux/amd64, linux/arm64 ]
-
-    runs-on: ${{ matrix.platform == 'linux/arm64' && 'ubuntu-22.04-arm' || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
 
     container:
       image: ghcr.io/zen0x7f/container:debug
