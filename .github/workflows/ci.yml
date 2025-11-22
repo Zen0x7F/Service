@@ -73,5 +73,5 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: |
-            ./storage/coverage/coverage.xml
-            ./storage/coverage/js/lcov.info
+            /__w/Service/Service/storage/coverage/coverage.xml
+            /__w/Service/Service/storage/coverage/js/lcov.info
