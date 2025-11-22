@@ -1,19 +1,19 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es2015",
         "module": "es2020",
+        "lib": ["esnext", "dom"],
         "moduleResolution": "node",
         "baseUrl": "./",
         "strict": true,
         "skipLibCheck": true,
         "noImplicitAny": false,
         "paths": {
-            "@/*": ["./resources/ts/*"],
-            "@components/*": ["./resources/ts/components/*"]
+            "@/*": ["/resources/ts/*"],
         },
-        "types": ["@intlify/unplugin-vue-i18n/messages"]
+        "types": ["@types/node", "vitest/globals", "@intlify/unplugin-vue-i18n/messages"],
     },
-    "include": ["resources/ts/**/*"],  // Frontend paths pattern
+    "include": ["resources/ts/**/*", "resources/ts/**/*.vue"],
     "exclude": ["node_modules", "vendor"],
     "ts-node": {
         "require": ["tsconfig-paths/register"]

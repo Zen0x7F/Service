@@ -13,6 +13,6 @@ export default ts.config(
             parserOptions: {
                 parser: "@typescript-eslint/parser",
             },
-        },
+        }
     },
 );

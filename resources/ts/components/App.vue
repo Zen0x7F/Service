@@ -4,6 +4,7 @@
             <Component :is="Component" />
         </div>
     </router-view>
+    <IndexPage />
     <div class="locale-changer">
         <select v-model="$i18n.locale">
             <option
@@ -17,4 +18,17 @@
     </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { ref, onMounted } from "vue";
+import IndexPage from "@/pages/index-page.vue";
+
+const mounted = ref(false);
+
+onMounted(() => {
+    mounted.value = true;
+});
+
+defineExpose({
+    mounted,
+});
+</script>
