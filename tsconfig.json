@@ -8,10 +8,12 @@
         "skipLibCheck": true,
         "noImplicitAny": false,
         "paths": {
-            "@/*": ["resources/ts/*"]
+            "@/*": ["./resources/ts/*"],
+            "@components/*": ["./resources/ts/components/*"]
         }
     },
     "include": ["resources/ts/**/*"],  // Frontend paths pattern
+    "exclude": ["node_modules", "vendor"],
     "ts-node": {
         "require": ["tsconfig-paths/register"]
     }

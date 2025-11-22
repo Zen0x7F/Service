@@ -11,6 +11,8 @@
 /.phpunit.cache
 /.vscode
 /.zed
+static
+.vite-ssg-temp
 /auth.json
 /node_modules
 /public/build

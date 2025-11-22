@@ -5,9 +5,13 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 
 export default defineConfig({
+    base: '/',
+    build: {
+        outDir: 'static',
+    },
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/ts/app.ts'],
+            input: ['resources/ts/app.ts'],
             refresh: true,
         }),
         tailwindcss(),
@@ -22,7 +26,7 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, './resources/ts'),
+            '@': path.resolve(__dirname, 'resources/ts'),
         }
     }
 });
