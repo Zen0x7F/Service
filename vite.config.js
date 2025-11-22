@@ -14,7 +14,7 @@ export default defineConfig({
     },
     plugins: [
         VueI18nPlugin({
-            include: resolve(dirname(fileURLToPath(import.meta.url)), './resources/ts/locales/**'),
+            ssr: true,
         }),
         laravel({
             input: ['./resources/ts/app.ts'],
