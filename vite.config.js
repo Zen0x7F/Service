@@ -1,8 +1,11 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
+import { fileURLToPath } from 'url'
+import { resolve, dirname } from 'node:path'
 
 export default defineConfig({
     base: '/',
@@ -10,8 +13,11 @@ export default defineConfig({
         outDir: 'static',
     },
     plugins: [
+        VueI18nPlugin({
+            ssr: true,
+        }),
         laravel({
-            input: ['resources/ts/app.ts'],
+            input: ['./resources/ts/app.ts'],
             refresh: true,
         }),
         tailwindcss(),

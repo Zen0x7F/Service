@@ -10,7 +10,8 @@
         "paths": {
             "@/*": ["./resources/ts/*"],
             "@components/*": ["./resources/ts/components/*"]
-        }
+        },
+        "types": ["@intlify/unplugin-vue-i18n/messages"]
     },
     "include": ["resources/ts/**/*"],  // Frontend paths pattern
     "exclude": ["node_modules", "vendor"],
