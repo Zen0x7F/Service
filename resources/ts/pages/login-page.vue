@@ -6,17 +6,17 @@
             <img
                 class="mx-auto h-32 w-auto dark:hidden"
                 src="@/assets/logo.png"
-                alt="Your Company"
+                alt="Service"
             />
             <img
                 class="mx-auto h-32 w-auto not-dark:hidden"
                 src="@/assets/logo.png"
-                alt="Your Company"
+                alt="Service"
             />
             <h2
                 class="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900 dark:text-white"
             >
-                Sign in to your account
+                {{ $t("login") }}
             </h2>
         </div>
 
@@ -29,7 +29,7 @@
                         <label
                             for="email"
                             class="block text-sm/6 font-medium text-gray-900 dark:text-white"
-                            >Email address</label
+                            >{{ $t("email") }}</label
                         >
                         <div class="mt-2">
                             <input
@@ -46,7 +46,7 @@
                         <label
                             for="password"
                             class="block text-sm/6 font-medium text-gray-900 dark:text-white"
-                            >Password</label
+                            >{{ $t("password") }}</label
                         >
                         <div class="mt-2">
                             <input
@@ -94,7 +94,7 @@
                             <label
                                 for="remember-me"
                                 class="block text-sm/6 text-gray-900 dark:text-white"
-                                >Remember me</label
+                                >{{ $t("remember_me") }}</label
                             >
                         </div>
 
@@ -102,7 +102,7 @@
                             <a
                                 href="#"
                                 class="font-semibold text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300"
-                                >Forgot password?</a
+                                >{{ $t("forgot_password") }}</a
                             >
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                             type="submit"
                             class="flex w-full justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-emerald-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 dark:bg-emerald-500 dark:shadow-none dark:hover:bg-emerald-400 dark:focus-visible:outline-emerald-500"
                         >
-                            Confirm
+                            {{ $t("confirm") }}
                         </button>
                     </div>
                 </form>
