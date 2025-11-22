@@ -59,6 +59,7 @@ jobs:
         env:
           DB_HOST: mysql
           DB_PORT: 3306
+          LARAVEL_BYPASS_ENV_CHECK: 1
         run: |
           # Running PHP tests
           php artisan test --coverage --coverage-clover storage/coverage/coverage.xml
