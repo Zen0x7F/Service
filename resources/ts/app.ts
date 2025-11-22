@@ -8,17 +8,18 @@ import routes from "./routes";
 import App from "./components/App.vue";
 import messages from "./locales";
 
+const i18n = createI18n({
+    locale: "es",
+    messages: messages,
+});
+
 export const createApp = ViteSSG(
     App,
     { routes, base: "/" },
     ({ app, isClient /*router, routes, isClient, initialState*/ }) => {
+        app.use(i18n);
         if (isClient) {
             const pinia = createPinia();
-            const i18n = createI18n({
-                locale: "es",
-                messages: messages,
-            });
-            app.use(i18n);
             app.use(pinia);
 
             app.config.globalProperties.$axios = axios;
