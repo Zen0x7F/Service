@@ -6,10 +6,10 @@ import { createI18n } from "vue-i18n";
 import axios from "axios";
 import routes from "./routes";
 import App from "./components/App.vue";
-import messages from "./locales";
+import messages from "./messages";
 
 const i18n = createI18n({
-    locale: "es",
+    locale: "en",
     messages: messages,
 });
 

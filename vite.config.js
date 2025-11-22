@@ -4,8 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
-import { fileURLToPath } from 'url'
-import { resolve, dirname } from 'node:path'
+import istanbul from 'vite-plugin-istanbul'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
     base: '/',
@@ -29,10 +29,48 @@ export default defineConfig({
                 }
             }
         }),
+        istanbul({
+            include: [
+                './resources/ts/pages/**/*.{ts,vue}',
+                './resources/ts/components/**/*.{ts,vue}',
+                './resources/ts/states/**/*.{ts,vue}',
+            ],
+            exclude: ['node_modules', 'test', 'tests'],
+            extension: ['.js', '.ts', '.vue'],
+            cypress: true,
+            forceBuildInstrument: true
+        }),
+        tsconfigPaths(),
     ],
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, 'resources/ts'),
+            '@': path.resolve(__dirname, './resources/ts'),
+        }
+    },
+    test: {
+        environment: 'jsdom',
+        globals: true,
+        include: ['./resources/ts/tests/**/*.test.{js,ts}', './resources/ts/tests/**/*.spec.{js,ts}'],
+        watch: false,
+        setupFiles: ['./resources/ts/tests/setup.ts'],
+        coverage: {
+            provider: 'v8',
+            reporter: ['text', 'lcov', 'html'],
+            reportsDirectory: './storage/coverage/js',
+            include: [
+                'resources/ts/pages/**/*.{ts,vue}',
+                'resources/ts/components/**/*.{ts,vue}',
+                'resources/ts/states/**/*.{ts,vue}',
+            ],
+            exclude: [
+                'resources/ts/assets/**',
+                'resources/ts/locales/**',
+                '**/*.png',
+                '**/*.jpg',
+                '**/*.svg',
+                '**/*.css',
+                '**/*.json'
+            ]
         }
     }
 });
