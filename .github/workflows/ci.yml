@@ -72,6 +72,3 @@ jobs:
         if: ${{ matrix.platform == 'linux/amd64' }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: |
-            /__w/Service/Service/storage/coverage/coverage.xml
-            /__w/Service/Service/storage/coverage/js/lcov.info
